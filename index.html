@@ -148,7 +148,8 @@ function baixar() {
   const el = document.getElementById("assinatura");
 
   html2canvas(el, {
-    scale: 3
+    scale: 4, // 🔥 aumenta qualidade
+    useCORS: true
   }).then(canvas => {
 
     const finalCanvas = document.createElement("canvas");
@@ -156,6 +157,11 @@ function baixar() {
     finalCanvas.height = 150;
 
     const ctx = finalCanvas.getContext("2d");
+
+    // 🔥 melhora qualidade ao reduzir
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
     ctx.drawImage(canvas, 0, 0, 450, 150);
 
     const link = document.createElement("a");
