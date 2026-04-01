@@ -150,16 +150,20 @@ function baixar() {
   const el = document.getElementById("assinatura");
 
   html2canvas(el, {
-    scale: 3,
-    backgroundColor: null
+    scale: 3
   }).then(canvas => {
+
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = 450;
+    finalCanvas.height = 150;
+
+    const ctx = finalCanvas.getContext("2d");
+    ctx.drawImage(canvas, 0, 0, 450, 150);
+
     const link = document.createElement("a");
     link.download = "assinatura.png";
-    link.href = canvas.toDataURL("image/png");
+    link.href = finalCanvas.toDataURL("image/png");
     link.click();
-  }).catch(err => {
-    alert("Erro ao gerar imagem.");
-    console.error(err);
   });
 }
 </script>
